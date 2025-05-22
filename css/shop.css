@@ -1,0 +1,494 @@
+:root {
+  --shopCard-width-350px: 40px;
+  --shopCard-height-350px: 60px;
+  --shopCard-gap-350px: 2px;
+  --shopCard-width-390px: 50px;
+  --shopCard-height-390px: 70px;
+  --shopCard-gap-390px: 10px;
+  --shopCard-gap-450px: 10px;
+  --shopCard-width-600px: 70px;
+  --shopCard-height-600px: 90px;
+  --shopCard-gap-600px: 10px;
+  --shopCard-width-1200px: 100px;
+  --shopCard-height-1200px: 150px;
+  --shopCard-gap-1200px: 15px;
+  --shopCard-width-1600px: 150px;
+  --shopCard-height-1600px: 250px;
+}
+
+.shop {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a3a1a, #0a5a2a);
+  z-index: 1000;
+  padding: 1rem;
+  color: white;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.shop-head {
+  display: flex;
+  gap: 10rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.shop h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.balance {
+  display: flex;
+  gap: 0.2rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.choose-container {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.all-items-container {
+  display: flex;
+  gap: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.item-container {
+  text-align: center;
+  padding: 5px;
+}
+
+p {
+  background-color: rgb(61, 106, 188);
+  color: black;
+  border-radius: 5px;
+}
+
+.shop-card-container {
+  display: flex;
+  gap: 5px;
+}
+
+.shop-items {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  transition: transform 0.3s ease;
+  padding: 10px 0;
+}
+
+.shop-items {
+  /* display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto; */
+  min-width: 100%;
+}
+
+.shop-card {
+  min-width: var(--shopCard-width-1200px);
+  min-height: var(--shopCard-height-600px);
+  border-radius: 10px;
+  box-sizing: border-box;
+  /* margin: 0px 5px; */
+  background-color: white;
+}
+
+.cosmo {
+  background: radial-gradient(circle at center, #000428, #004e92),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='white'/%3E%3Ccircle cx='80' cy='120' r='1' fill='white'/%3E%3C/svg%3E");
+  color: white;
+}
+
+.cosmo-red-card {
+  border: 1px solid #ff4d4d;
+}
+
+.cosmo-black-card {
+  border: 1px solid #4d79ff;
+}
+
+.neon {
+  background: #111;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.neon-red {
+  text-shadow: 0 0 5px #ff3366, 0 0 10px #ff0033;
+}
+
+.neon-black {
+  text-shadow: 0 0 5px #66ccff, 0 0 10px #3399ff;
+}
+
+.metal {
+  /* background: 
+  linear-gradient(115deg, 
+    #ddd 0%, 
+    #fff 20%, 
+    #ddd 40%, 
+    #fff 60%, 
+    #ddd 80%, 
+    #fff 100%);
+box-shadow: 0 3px 10px rgb(0, 0, 0); */
+  background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+  color: white;
+  text-shadow: 0 1px 3px black;
+}
+
+.metal-red {
+  /* text-shadow: 0 0 2px rgba(255, 0, 0, 0.882); */
+  color: #ff9999;
+}
+
+.metal-black {
+  /* text-shadow: 0 0 2px rgba(0, 0, 0, 0.868); */
+  color: #ccccff;
+}
+
+.leather {
+  background: radial-gradient(circle at 70% 30%, #f5e7d0 0%, #e6d5b8 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="rgba(139,69,19,0.1)" d="M0 0h100v100H0z"/></svg>');
+  border: 2px solid #8b4513;
+  color: #5a3921;
+  box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.3);
+}
+
+.liquid-metal {
+  background: linear-gradient(
+    135deg,
+    rgba(200, 200, 200, 0.8) 0%,
+    rgba(150, 150, 150, 0.9) 50%,
+    rgba(200, 200, 200, 0.8) 100%
+  );
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    inset 0 0 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-metal::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  transform: rotate(30deg);
+  animation: shine 3s infinite;
+}
+@keyframes shine {
+  0% {
+    transform: rotate(30deg) translate(-30%, -30%);
+  }
+  100% {
+    transform: rotate(30deg) translate(30%, 30%);
+  }
+}
+
+/* Общие стили для старых карт */
+.shop-card.old {
+  position: relative;
+  background: #f5f0e1;
+  border-radius: 5px;
+  box-shadow: 
+    0 2px 5px rgba(0,0,0,0.3),
+    inset 1px 1px 0 rgba(255,255,255,0.3),
+    inset -1px -1px 0 rgba(0,0,0,0.1);
+  
+  /* Текстура бумаги */
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  
+  /* Неровные края */
+  clip-path: polygon(
+    0 3%, 3% 0, 97% 0, 100% 3%, 
+    100% 97%, 97% 100%, 3% 100%, 0% 97%
+  );
+  
+  /* Эффект пожелтевшей бумаги */
+  filter: sepia(30%) brightness(95%);
+}
+
+/* Специфичные стили для красных карт */
+.shop-card.old-red-card {
+  border: 1px solid #d5a6a6;
+}
+
+/* Специфичные стили для черных карт */
+.shop-card.old-black-card {
+  border: 1px solid #a6a6a6;
+}
+
+/* Эффекты износа (общие) */
+.shop-card.old::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    /* Пятна */
+    radial-gradient(circle at 20% 30%, rgba(175,160,130,0.1) 0%, transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(175,160,130,0.1) 0%, transparent 20%),
+    /* Складки */
+    linear-gradient(45deg, transparent 48%, rgba(0,0,0,0.05) 49%, rgba(0,0,0,0.05) 51%, transparent 52%);
+}
+
+/* Стили для текста карт */
+.value-red.old-red {
+  color: #8b0000;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+.value-black.old-black {
+  color: #3d2b1e;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+/* Позиционирование элементов */
+.shop-card-top-left.old,
+.shop-card-bottom-right.old {
+  font-size: 1.2em;
+  position: absolute;
+  font-family: 'Old Standard TT', serif;
+}
+
+.shop-card-center.old {
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Дополнительные эффекты при наведении */
+.shop-card.old:hover {
+  transform: rotate(1deg) scale(1.02);
+  box-shadow: 
+    0 5px 15px rgba(0,0,0,0.4),
+    inset 0 0 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Эффект потертых уголков */
+.shop-card.old::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #f5f0e1;
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  filter: brightness(110%);
+}
+
+/* Разные пятна для красных и черных карт */
+.shop-card.old-red-card::before {
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(200,100,100,0.1) 0%, transparent 25%),
+    linear-gradient(45deg, transparent 48%, rgba(0,0,0,0.05) 49%, transparent 52%);
+}
+
+.shop-card.old-black-card::before {
+  background: 
+    radial-gradient(circle at 70% 60%, rgba(100,100,100,0.1) 0%, transparent 25%),
+    linear-gradient(-45deg, transparent 48%, rgba(0,0,0,0.05) 49%, transparent 52%);
+}
+
+.shop-card-top-left {
+  box-sizing: border-box;
+  display: block;
+  text-align: left;
+  padding-left: 5%;
+  padding-top: 3%;
+  font-size: 30px;
+}
+
+.shop-card-center {
+  font-size: 120px;
+}
+
+.shop-card-bottom-right {
+  box-sizing: border-box;
+  display: block;
+  padding-right: 5%;
+  padding-bottom: 3%;
+  margin-top: 20%;
+  font-size: 30px;
+  text-align: right;
+}
+
+.item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s;
+  /* flex: 0 0 150px; Фиксированная ширина карточки */
+  scroll-snap-align: start;
+}
+
+.item:hover {
+  transform: scale(1.05);
+}
+
+.buy-btn {
+  background: #ffd700;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 10px;
+  color: black;
+}
+
+#shop-back {
+  display: block;
+  width: 10rem;
+  height: 3rem;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.value-red {
+  color: red;
+}
+.value-black {
+  color: black;
+}
+
+@media (min-width: 350px) {
+  .shop-head {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+  .shop h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .all-items-container {
+    gap: 10px;
+    margin-bottom: 90px;
+  }
+
+  .shop-items {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .item {
+    padding: 0.5rem;
+    text-align: center;
+    min-width: 150px;
+  }
+}
+
+@media (min-width: 900px) {
+  .item {
+    padding: 0.5rem;
+    min-width: 190px;
+  }
+
+  .shop-card {
+    min-width: var(--shopCard-width-1600px);
+    min-height: var(--shopCard-height-1600px);
+    border-radius: 10px;
+    margin: 0px 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shop-head {
+    display: flex;
+    gap: 10rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+  .shop h2 {
+    font-size: 1.5rem;
+    /* margin-bottom: 1rem; */
+  }
+
+  .shop-card {
+    min-width: var(--shopCard-width-1200px);
+    min-height: var(--shopCard-height-1600px);
+    border-radius: 10px;
+    margin: 0px 5px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .all-items-container {
+    gap: 50px;
+  }
+}
+
+@media (min-width: 1900px) {
+  .shop-head {
+    display: flex;
+    gap: 10rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .shop h2 {
+    font-size: 1.5rem;
+    /* margin-bottom: 1rem; */
+  }
+
+  .all-items-container {
+    gap: 50px;
+  }
+
+  .shop-items-wrapper {
+    overflow: hidden;
+    flex: 0 1 10%; /* Основное пространство для карт */
+    min-width: 50px; /* Минимальная ширина */
+    text-align: center;
+  }
+
+  .shop-card {
+    min-width: var(--shopCard-width-1200px);
+    min-height: var(--shopCard-height-1600px);
+    border-radius: 10px;
+    margin: 0px 5px;
+  }
+}

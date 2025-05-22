@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
+    />
+    <title>Хусынка</title>
+    <link rel="stylesheet" href="css/style2.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/settings.css" />
+    <link rel="stylesheet" href="css/shop.css" />
+    <link rel="stylesheet" href="css/shopBackCards.css" />
+    <!-- <link rel="manifest" href="manifest.json"> -->
+  </head>
+  <body>
+    <button class="full-screen-button" id="full-screen-btn">+</button>
+    <!-- <div id="player-modal" class="modal">
+      <div class="modal-content">
+        <h2 class="name-h2">Введите ваше имя</h2>
+        <input
+          type="text"
+          id="player-name"
+          placeholder="Игрок"
+          maxlength="12"
+        />
+        <div class="modal-buttons">
+          <button id="start-game">Начать игру</button>
+          <button id="skip-name">Пропустить</button>
+        </div>
+      </div>
+    </div> -->
+    <form id="player-modal" class="modal">
+      <div class="modal-content">
+        <h2 class="name-h2">Введите ваше имя</h2>
+        <input
+          type="text"
+          id="player-name"
+          name="player_name"
+          placeholder="Игрок"
+          maxlength="12"
+          required
+        />
+        <div class="modal-buttons">
+          <button type="submit">Начать игру</button>
+          <button type="button" id="skip-name">Пропустить</button>
+        </div>
+      </div>
+    </form>
+    <!-- Меню игры -->
+    <div id="game-menu" class="menu hidden">
+      <h1>Хусынка</h1>
+      <button id="new-game-btn">Новая игра</button>
+      <button id="settings-btn">Настройки</button>
+      <button id="shop-btn">Магазин</button>
+      <button id="exit-btn">Выход</button>
+    </div>
+
+    <!-- Настройки -->
+    <div id="settings" class="settings hidden">
+      <h2>Настройки</h2>
+      <div class="setting-item">
+        <label
+          >Звуки: <input type="checkbox" id="sound-toggle" checked
+        /></label>
+      </div>
+      <div class="setting-item">
+        <label
+          >Сложность:
+          <select id="difficulty">
+            <option value="easy">Лёгкая</option>
+            <option value="normal" selected>Обычная</option>
+            <option value="hard">Сложная</option>
+          </select>
+        </label>
+      </div>
+      <button id="back-to-menu">Назад в меню</button>
+    </div>
+
+    <!-- Магазин -->
+    <div id="shop" class="shop hidden">
+      <div class="shop-head">
+        <button id="shop-back">Назад</button>
+        <h2>Магазин</h2>
+        <div class="balance">Баланс: <span id="coins">0</span> монет</div>
+      </div>
+      <div class="choose-container">
+        <button class="btn-card-face btn" id="face-btn">Лицо</button>
+        <button class="btn-card-shirt btn" id="shirt-btn">Рубашка</button>
+        <button class="btn-card-fon btn" id="fon-btn">Фон</button>
+      </div>
+      <div class="all-items-container" id="face-container">
+        <div class="item-container">
+          <p>Классический</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="classic" id="classic-skin-1">
+              <div
+                class="shop-card"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red">A♥</span>
+                <span class="shop-card-center value-red">♥</span>
+                <span class="shop-card-bottom-right value-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="classic" id="classic-skin-2">
+              <div
+                class="shop-card"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black">K♣</span>
+                <span class="shop-card-center value-black">♣</span>
+                <span class="shop-card-bottom-right value-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="classic" data-price="0">Выбрать</button>
+        </div>
+        <div class="item-container">
+          <p>Космо стиль</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="cosmo" id="cosmo-skin-1">
+              <div
+                class="shop-card cosmo-red-card cosmo"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red cosmo-red">A♥</span>
+                <span class="shop-card-center value-red cosmo-red">♥</span>
+                <span class="shop-card-bottom-right value-red cosmo-red"
+                  >A♥</span
+                >
+              </div>
+            </div>
+            <div class="item" data-style="cosmo" id="cosmo-skin-2">
+              <div
+                class="shop-card cosmo-black-card cosmo"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black cosmo-black"
+                  >K♣</span
+                >
+                <span class="shop-card-center value-black cosmo-black">♣</span>
+                <span class="shop-card-bottom-right value-black cosmo-black"
+                  >K♣</span
+                >
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="cosmo" data-price="100">Купить (100)</button>
+        </div>
+        <div class="item-container">
+          <p>Неоновый</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="neon" id="neon-skin-1">
+              <div
+                class="shop-card neon"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red neon-red">A♥</span>
+                <span class="shop-card-center value-red neon-red">♥</span>
+                <span class="shop-card-bottom-right value-red neon-red"
+                  >A♥</span
+                >
+              </div>
+            </div>
+            <div class="item" data-style="neon" id="neon-skin-2">
+              <div
+                class="shop-card neon"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black neon-black"
+                  >K♣</span
+                >
+                <span class="shop-card-center value-black neon-black">♣</span>
+                <span class="shop-card-bottom-right value-black neon-black"
+                  >K♣</span
+                >
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="neon" data-price="100">Купить (100)</button>
+        </div>
+        <div class="item-container">
+          <p>Холодный металл</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="metal" id="metal-skin-1">
+              <div
+                class="shop-card metal-red-card metal"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red metal-red">A♥</span>
+                <span class="shop-card-center value-red metal-red">♥</span>
+                <span class="shop-card-bottom-right value-red metal-red"
+                  >A♥</span
+                >
+              </div>
+            </div>
+            <div class="item" data-style="metal" id="metal-skin-2">
+              <div
+                class="shop-card metal-black-card metal"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black metal-black"
+                  >K♣</span
+                >
+                <span class="shop-card-center value-black metal-black">♣</span>
+                <span class="shop-card-bottom-right value-black metal-black"
+                  >K♣</span
+                >
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="metal" data-price="100">Купить (100)</button>
+        </div>
+        <div class="item-container">
+          <p>Кожаный</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="leather" id="leather-skin-1">
+              <div
+                class="shop-card leather-red-card leather"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red leather-red">A♥</span>
+                <span class="shop-card-center value-red leather-red">♥</span>
+                <span class="shop-card-bottom-right value-red leather-red"
+                  >A♥</span
+                >
+              </div>
+            </div>
+            <div class="item" data-style="leather" id="leather-skin-2">
+              <div
+                class="shop-card leather-black-card leather"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black leather-black"
+                  >K♣</span
+                >
+                <span class="shop-card-center value-black leather-black"
+                  >♣</span
+                >
+                <span class="shop-card-bottom-right value-black leather-black"
+                  >K♣</span
+                >
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="leather" data-price="100">Купить (100)</button>
+        </div>
+        <div class="item-container">
+          <p>Жидкий металл</p>
+          <div class="shop-card-container">
+            <div
+              class="item"
+              data-style="liquid-metal"
+              id="liquid-metal-skin-1"
+            >
+              <div
+                class="shop-card liquid-metal-red-card liquid-metal"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red liquid-metal-red"
+                  >A♥</span
+                >
+                <span class="shop-card-center value-red liquid-metal-red"
+                  >♥</span
+                >
+                <span class="shop-card-bottom-right value-red liquid-metal-red"
+                  >A♥</span
+                >
+              </div>
+            </div>
+            <div
+              class="item"
+              data-style="liquid-metal"
+              id="liquid-metal-skin-2"
+            >
+              <div
+                class="shop-card liquid-metal-black-card liquid-metal"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black liquid-metal-black"
+                  >K♣</span
+                >
+                <span class="shop-card-center value-black liquid-metal-black"
+                  >♣</span
+                >
+                <span
+                  class="shop-card-bottom-right value-black liquid-metal-black"
+                  >K♣</span
+                >
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="liquid-metal" data-price="100">Купить (100)</button>
+        </div>
+        <div class="item-container">
+          <p>Старые</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="old" id="old-skin-1">
+              <div
+                class="shop-card old-red-card old"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left value-red old-red">A♥</span>
+                <span class="shop-card-center value-red old-red">♥</span>
+                <span class="shop-card-bottom-right value-red old-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="old" id="old-skin-2">
+              <div
+                class="shop-card old-black-card old"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left value-black old-black">K♣</span>
+                <span class="shop-card-center value-black old-black">♣</span>
+                <span class="shop-card-bottom-right value-black old-black"
+                  >K♣</span
+                >
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="old" data-price="100">Купить (200)</button>
+        </div>
+      </div>
+      <div
+        class="all-items-container"
+        id="shirt-container"
+        style="display: none"
+      >
+        <div class="item-container">
+          <p>Классический</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="old-back" id="old-back-skin-1">
+              <div
+                class="shop-card old-back-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left old-back-red">A♥</span>
+                <span class="shop-card-center old-back-red">♥</span>
+                <span class="shop-card-bottom-right old-back-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="old-back" id="old-back-skin-2">
+              <div
+                class="shop-card old-back-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left old-back-black">K♣</span>
+                <span class="shop-card-center old-back-black">♣</span>
+                <span class="shop-card-bottom-right old-back-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="old-back" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Элегантный красный узор</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="elegantRed" id="elegantRed-skin-1">
+              <div
+                class="shop-card elegantRed-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left elegantRed-red">A♥</span>
+                <span class="shop-card-center elegantRed-red">♥</span>
+                <span class="shop-card-bottom-right elegantRed-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="elegantRed" id="elegantRed-skin-2">
+              <div
+                class="shop-card elegantRed-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left elegantRed-black">K♣</span>
+                <span class="shop-card-center elegantRed-black">♣</span>
+                <span class="shop-card-bottom-right elegantRed-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="elegantRed" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Золотой</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="goldV" id="goldV-skin-1">
+              <div
+                class="shop-card goldV-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left goldV-red">A♥</span>
+                <span class="shop-card-center goldV-red">♥</span>
+                <span class="shop-card-bottom-right goldV-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="goldV" id="goldV-skin-2">
+              <div
+                class="shop-card goldV-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left goldV-black">K♣</span>
+                <span class="shop-card-center goldV-black">♣</span>
+                <span class="shop-card-bottom-right goldV-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn"  data-style-btn="goldV" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Фиолетовый космический</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="cosmoViolet" id="cosmoViolet-skin-1">
+              <div
+                class="shop-card cosmoViolet-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left cosmoViolet-red">A♥</span>
+                <span class="shop-card-center cosmoViolet-red">♥</span>
+                <span class="shop-card-bottom-right cosmoViolet-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="cosmoViolet" id="cosmoViolet-skin-2">
+              <div
+                class="shop-card cosmoViolet-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left cosmoViolet-black">K♣</span>
+                <span class="shop-card-center cosmoViolet-black">♣</span>
+                <span class="shop-card-bottom-right cosmoViolet-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="cosmoViolet" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Игральные кости</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="dice" id="dice-skin-1">
+              <div
+                class="shop-card dice-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left dice-red">A♥</span>
+                <span class="shop-card-center dice-red">♥</span>
+                <span class="shop-card-bottom-right dice-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="dice" id="dice-skin-2">
+              <div
+                class="shop-card dice-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left dice-black">K♣</span>
+                <span class="shop-card-center dice-black">♣</span>
+                <span class="shop-card-bottom-right dice-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="dice" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Дерево</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="treeB" id="treeB-skin-1">
+              <div
+                class="shop-card treeB-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left treeB-red">A♥</span>
+                <span class="shop-card-center treeB-red">♥</span>
+                <span class="shop-card-bottom-right treeB-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="treeB" id="treeB-skin-2">
+              <div
+                class="shop-card treeB-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left treeB-black">K♣</span>
+                <span class="shop-card-center treeB-black">♣</span>
+                <span class="shop-card-bottom-right treeB-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="treeB" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Сепия</p>
+          <div class="shop-card-container">
+            <div class="item" data-style="sepiya" id="sepiya-skin-1">
+              <div
+                class="shop-card sepiya-red-card shopShirt-card-back"
+                data-suit="♥"
+                data-value="A"
+                data-color="red"
+              >
+                <span class="shop-card-top-left sepiya-red">A♥</span>
+                <span class="shop-card-center sepiya-red">♥</span>
+                <span class="shop-card-bottom-right sepiya-red">A♥</span>
+              </div>
+            </div>
+            <div class="item" data-style="sepiya" id="sepiya-skin-2">
+              <div
+                class="shop-card sepiya-black-card shopShirt-card-back"
+                data-suit="♣"
+                data-value="K"
+                data-color="black"
+              >
+                <span class="shop-card-top-left sepiya-black">K♣</span>
+                <span class="shop-card-center sepiya-black">♣</span>
+                <span class="shop-card-bottom-right sepiya-black">K♣</span>
+              </div>
+            </div>
+          </div>
+          <button class="buy-btn" data-style-btn="sepiya" data-price="100">Купить (200)</button>
+        </div>
+      </div>
+      <div class="all-items-container" id="fon-container" style="display: none">
+        <div class="item-container">
+          <p>Сепия</p>
+          <div class="shop-card-container">
+            <img src="assets/shop/fons/fon_1_1.jpg">
+          </div>
+          <button class="buy-btn" data-fon-btn="fon_1.jpg" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Поле</p>
+          <div class="shop-card-container">
+            <img src="assets/shop/fons/fon_2_1.jpg">
+          </div>
+          <button class="buy-btn" data-fon-btn="fon_2.jpg" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Поле 2</p>
+          <div class="shop-card-container">
+            <img src="assets/shop/fons/fon_3_1.jpg">
+          </div>
+          <button class="buy-btn" data-fon-btn="fon_3.jpg" data-price="100">Купить (200)</button>
+        </div>
+        <div class="item-container">
+          <p>Поле 3</p>
+          <div class="shop-card-container">
+            <img src="assets/shop/fons/fon_4_1.jpg">
+          </div>
+          <button class="buy-btn" data-fon-btn="fon_4.jpg" data-price="100">Купить (200)</button>
+        </div>
+      </div>
+    </div>
+    <!-- Игровой интерфейс -->
+    <div id="game-interface" class="game-interface hidden">
+      <div class="info-container" id="info-top">
+        <div id="message"></div>
+        <div class="points-game" id="points-in-game"></div>
+      </div>
+      <div id="game-container">
+        <div class="row-1" id="row">
+          <div class="row-a" id="stockDiv"></div>
+          <div class="row-b" id="foundationsDiv"></div>
+        </div>
+        <div class="row-2" id="tableausDiv"></div>
+      </div>
+      <div id="controls">
+        <button class="controls-btn" id="new-game">Новая игра</button>
+        <button class="controls-btn" id="hint">Подсказка</button>
+        <button class="controls-btn" id="menu-btn">Меню</button>
+      </div>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

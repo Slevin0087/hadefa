@@ -17,7 +17,8 @@
   --stock-borderRadius-350px: 0.25em;
   --stock-borderRadius-900px: 10px;
   --stock-borderRadius-1600px: 10px;
-  --minHeight-messageContainer-350px: 50px;
+  --minHeight-messageContainer-350px: 80px;
+  --minHeight-messageContainer-700px: 25px;
   --minHeight-messageContainer-1600px: 20px;
   --modal-content-width: 15.62em;
   --modal-content-height: 9.37em;
@@ -518,7 +519,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 70%;
+    margin-top: 65%;
   }
 
   .center {
@@ -533,7 +534,7 @@ button:active {
 
 @media (min-width: 358px) {
     #controls {
-    margin-top: 38vh;
+    margin-top: 35vh;
   }
 }
 
@@ -586,7 +587,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 35vh;
   }
 
   .top-left {
@@ -609,9 +610,13 @@ button:active {
     height: 40%;
   }
 
-  /* #controls {
+  #message {
+    min-height: var(--minHeight-messageContainer-700px);
+  }
+
+  #controls {
     margin-top: 40vh;
-  } */
+  }
 }
 
 /* @media (min-width: 600px) {
@@ -719,7 +724,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 }
 
@@ -731,7 +736,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 }
 
@@ -743,7 +748,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 
   .top-left {
@@ -767,7 +772,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 }
 
@@ -797,7 +802,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 }
 
@@ -823,7 +828,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 }
 
@@ -925,7 +930,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 38vh;
+    margin-top: 40vh;
   }
 }
 
@@ -977,6 +982,6 @@ button:active {
   }
 
   #controls {
-    margin-top: 35vh;
+    margin-top: 40vh;
   }
 }

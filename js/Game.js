@@ -192,7 +192,7 @@ export class Game {
       // console.log('wH:', wH);
       
       // const topPx = wH <= 540 ? 8 : 25;
-      const topPx = 14;
+      const topPx = 20;
       console.log('topPx:', topPx);
       
       cardElement.style.top = offset * topPx - cStyleBorder + "px";

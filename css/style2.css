@@ -531,6 +531,12 @@ button:active {
   } */
 }
 
+@media (min-width: 350px) {
+    #controls {
+    margin-top: 38vh;
+  }
+}
+
 @media (min-width: 450px) {
   .row-1,
   .row-2 {
@@ -919,7 +925,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 35vh;
+    margin-top: 38vh;
   }
 }
 

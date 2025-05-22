@@ -518,7 +518,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 45%;
+    margin-top: 70%;
   }
 
   .center {
@@ -580,7 +580,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 35vh;
+    margin-top: 38vh;
   }
 
   .top-left {
@@ -603,9 +603,9 @@ button:active {
     height: 40%;
   }
 
-  #controls {
-    margin-top: 30vh;
-  }
+  /* #controls {
+    margin-top: 40vh;
+  } */
 }
 
 /* @media (min-width: 600px) {
@@ -713,7 +713,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 30vh;
+    margin-top: 38vh;
   }
 }
 
@@ -725,7 +725,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 35vh;
+    margin-top: 38vh;
   }
 }
 
@@ -737,7 +737,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 32vh;
+    margin-top: 38vh;
   }
 
   .top-left {
@@ -761,7 +761,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 40vh;
+    margin-top: 38vh;
   }
 }
 
@@ -791,7 +791,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 40vh;
+    margin-top: 38vh;
   }
 }
 
@@ -817,7 +817,7 @@ button:active {
   }
 
   #controls {
-    margin-top: 40vh;
+    margin-top: 38vh;
   }
 }
 

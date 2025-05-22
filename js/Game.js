@@ -13,8 +13,8 @@ export class Game {
     this.win = false;
     this.moveStockForFoundation = false;
     this.audio = new AudioManager();
-    // this.storage = GameStorage;
-    // this.settings = this.storage.getSettings();
+    this.storage = GameStorage;
+    this.settings = this.storage.getSettings();
     this.originalText = "";
     this.audio.toggle(this.settings.sound);
     this.gameContainer = document.getElementById("game-container");

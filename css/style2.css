@@ -531,7 +531,7 @@ button:active {
   } */
 }
 
-@media (min-width: 350px) {
+@media (min-width: 358px) {
     #controls {
     margin-top: 38vh;
   }

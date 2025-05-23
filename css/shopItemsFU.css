@@ -1,0 +1,109 @@
+/*  */
+.value-red {
+  color: red;
+}
+
+.value-black {
+  color: black;
+}
+
+/* Классический */
+.classic-fup {
+  background-color: white;
+}
+
+/* Космо стиль */
+.cosmo-fup {
+  background: radial-gradient(circle at center, #000428, #004e92),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='white'/%3E%3Ccircle cx='80' cy='120' r='1' fill='white'/%3E%3C/svg%3E");
+  color: white;
+}
+
+/* Неоновый */
+.neon-fup {
+  background: #111;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.neon-fup-red {
+  text-shadow: 0 0 5px #ff3366, 0 0 10px #ff0033;
+}
+
+.neon-fup-black {
+  text-shadow: 0 0 5px #66ccff, 0 0 10px #3399ff;
+}
+
+/* Холодный металл */
+.metal-fup {
+  background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+  color: white;
+  text-shadow: 0 1px 3px black;
+}
+
+.metal-fup-red {
+  text-shadow: 0 0 2px rgba(255, 0, 0, 0.882);
+}
+
+.metal-fup-black {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.868);
+}
+
+
+/* Кожаный */
+.leather-fup {
+  background: radial-gradient(circle at 70% 30%, #f5e7d0 0%, #e6d5b8 100%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><path fill='rgba(139,69,19,0.1)' d='M0 0h100v100H0z'/></svg>");
+  border: 2px solid #8b4513;
+  color: #5a3921;
+  box-shadow: inset 0 0 20px rgba(139, 69, 19, 0.3);
+}
+
+/* Жидкий металл */
+.liquid-metal-fup {
+  background: linear-gradient(
+    135deg,
+    rgba(200, 200, 200, 0.8) 0%,
+    rgba(150, 150, 150, 0.9) 50%,
+    rgba(200, 200, 200, 0.8) 100%
+  );
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+    inset 0 0 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Старые */
+.old-fup {
+  position: relative;
+  background: #f5f0e1;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  clip-path: polygon(
+    0 3%,
+    3% 0,
+    97% 0,
+    100% 3%,
+    100% 97%,
+    97% 100%,
+    3% 100%,
+    0% 97%
+  );
+  filter: sepia(30%) brightness(95%);
+}
+
+.value-red.old-red {
+  color: #8b0000;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.value-black.old-black {
+  color: #3d2b1e;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+}

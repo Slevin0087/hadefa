@@ -8,49 +8,48 @@ export const shopItemsFU = {
     liquidMetal: document.getElementById("liquid-metal-skin"),
     old: document.getElementById("old-skin"),
   },
+  selectedStyle: 'classic-fup',
 };
 
 const classicFaceUpBtn =
   shopItemsFU.faceUp.classic.getElementsByTagName("button");
-console.log("classicFaceUpBtn:", classicFaceUpBtn);
-
-classicFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
 const cosmoFaceUpBtn = shopItemsFU.faceUp.cosmo.getElementsByTagName("button");
-console.log("cosmoFaceUpBtn:", cosmoFaceUpBtn);
-
-cosmoFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
 const neonFaceUpBtn = shopItemsFU.faceUp.neon.getElementsByTagName("button");
-console.log("neonFaceUpBtn:", neonFaceUpBtn);
-
-neonFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
 const metalFaceUpBtn = shopItemsFU.faceUp.metal.getElementsByTagName("button");
-console.log("metalFaceUpBtn:", metalFaceUpBtn);
-
-metalFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const leatherFaceUpBtn = shopItemsFU.faceUp.leather.getElementsByTagName("button");
-console.log("leatherFaceUpBtn:", leatherFaceUpBtn);
-
-leatherFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const liquidMetalFaceUpBtn = shopItemsFU.faceUp.liquidMetal.getElementsByTagName("button");
-console.log("liquidMetalFaceUpBtn:", liquidMetalFaceUpBtn);
-
-liquidMetalFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
+const leatherFaceUpBtn =
+  shopItemsFU.faceUp.leather.getElementsByTagName("button");
+const liquidMetalFaceUpBtn =
+  shopItemsFU.faceUp.liquidMetal.getElementsByTagName("button");
 const oldFaceUpBtn = shopItemsFU.faceUp.old.getElementsByTagName("button");
-console.log("oldFaceUpBtn:", oldFaceUpBtn);
 
-oldFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
+classicFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.classic));
+cosmoFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.cosmo));
+neonFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.neon));
+metalFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.metal));
+leatherFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.leather));
+liquidMetalFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.liquidMetal));
+oldFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e, shopItemsFU.faceUp.old));
 
-function handleChangeScin(event) {
-  event.target;
-  console.log("event.target:", event.target);
+function handleChangeScin(event, element) {
   const price = Number(event.target.dataset.price);
+  console.log("price:", price);
+  console.log('event.target:', event.target);
+  console.log('element:', element);
+  const cardRed = element.getElementsByClassName('item')[0];
+  const cardBlack = element.getElementsByClassName('item')[1];
+  console.log('cardRed:', cardRed);
+  console.log('cardBlack:', cardBlack);
+  const selector = cardRed.getElementsByClassName(`${cardRed.dataset['style']}`);
+  console.log('selector:', selector);
+  // const style = selector[0].style;
+  // console.log('style:', style);
+  const styleName = `${event.target.dataset.styleBtn}`;
+  console.log('styleName:', styleName);
+  shopItemsFU.selectedStyle = styleName;
   
-  console.log('price:', price);
-  
+  // document.querySelectorAll('.card-faceUp').forEach((card) => {
+  //   card.style = style;
+  //   console.log('card.style:', card.style);
+    
+  // });  
 }

@@ -5,6 +5,8 @@ import { Stock } from "./Stock.js";
 import { AudioManager } from "./ui/Audio.js";
 import { GameStorage } from "./utils/Storage.js";
 import { Config } from "./ConfigGame.js";
+import { shopItemsFU } from "./ShopItemsFU.js";
+import { shopItemsShirt } from "./ShopItemsShirt.js";
 
 export class Game {
   constructor() {
@@ -39,6 +41,9 @@ export class Game {
     this.foundations = Array.from({ length: 4 }, (_, i) => new Foundation(i));
     this.tableaus = Array.from({ length: 7 }, (_, i) => new Tableau(i));
     this.stock = new Stock();
+    // this.faceUpStyle = `${shopItemsFU.selectStyle}`;
+    this.shirtStyle = "classic";
+    this.fonBody = "";
   }
 
   init() {
@@ -100,7 +105,7 @@ export class Game {
     // Добавляем элементы в DOM
     this.gameContainer.append(
       this.rowElement,
-      this.tableausEl,
+      this.tableausEl
       // this.buttonsContainer
     );
     this.rowElement.append(this.stockDivEl, this.foundationsDiv);
@@ -128,6 +133,8 @@ export class Game {
     this.renderCardsForFoundation();
     // Рендерим карту в waste
     this.renderCardsForWaste();
+    // Устанавливаем стили для stock добавив класс 
+    this.renderStockElement();
   }
 
   renderCardsForFoundation() {
@@ -147,14 +154,20 @@ export class Game {
     });
   }
 
-  renderCardsForWaste() {    
+  renderCardsForWaste() {
     const wasteCard = this.stock.getCurrentCard();
-    console.log('wasteCard:', wasteCard);
+    // console.log('wasteCard:', wasteCard);
     if (wasteCard) {
       wasteCard.wasteCard = true;
       this.renderCard(wasteCard, "waste", 0);
-    }    
+    }
   }
+
+  renderStockElement() {
+    const stockElement = document.getElementById('stock');
+    stockElement.className = '';
+    stockElement.classList.add('stock', 'card-back', `${shopItemsShirt.selectedStyle}`);
+  };
 
   renderCard(card, containerId, offset) {
     const container = document.getElementById(containerId);
@@ -179,7 +192,7 @@ export class Game {
     // card.getSymbol();
     const cStyle = window.getComputedStyle(container);
     const cStyleBorder = parseInt(cStyle.border);
-    console.log("cStyleBorder:", cStyleBorder);
+    // console.log("cStyleBorder:", cStyleBorder);
 
     cardElement.style.borderRadius = cStyle.borderRadius;
     cardElement.style.position = "absolute";
@@ -190,22 +203,32 @@ export class Game {
     if (containerId.startsWith("tableau-")) {
       // const wH = document.documentElement.clientHeight;
       // console.log('wH:', wH);
-      
+
       // const topPx = wH <= 540 ? 8 : 25;
       const topPx = 20;
-      console.log('topPx:', topPx);
-      
+      // console.log('topPx:', topPx);
+
       cardElement.style.top = offset * topPx - cStyleBorder + "px";
       // cardElement.style.top = offset * topPx + "px";
     } else {
+      console.log('else st');
+      
       cardElement.style.top = -cStyleBorder + "px";
       // cardElement.style.top = 0 + "px";
     }
     if (!card.faceUp) {
-      cardElement.classList.add("card-back");
+      // cardElement.classList.add("card-back");
+
+      cardElement.classList.add(`${shopItemsShirt.selectedStyle}`, 'card-back');
     }
     if (card.faceUp) {
-      cardElement.classList.add("card-faceUp");
+      // cardElement.classList.add("card-faceUp");
+      console.log(
+        "`${shopItemsFU.selectedStyle}`",
+        `${shopItemsFU.selectedStyle}`
+      );
+
+      cardElement.classList.add(`${shopItemsFU.selectedStyle}`);
       // this.handleCardClick(card, cardElement)
       cardElement.addEventListener("click", () => this.handleCardClick(card));
     } else if (containerId.startsWith("tableau-")) {
@@ -251,17 +274,17 @@ export class Game {
   // }
 
   handleCardClick(card) {
-    console.log('card:', card);
-    
+    // console.log('card:', card);
+
     this.audio.play("click");
     // 1. Проверяем Foundation
     for (let i = 0; i < this.foundations.length; i++) {
       if (this.foundations[i].canAccept(card)) {
         this.moveCardToFoundation(card, i);
-        console.log(
-          "this.moveStockForFoundation:",
-          this.moveStockForFoundation
-        );
+        // console.log(
+        //   "this.moveStockForFoundation:",
+        //   this.moveStockForFoundation
+        // );
 
         this.incrementPoints(Config.pointsForFoundation);
 
@@ -279,11 +302,11 @@ export class Game {
 
     // 2. Проверяем Tableau
     for (let i = 0; i < this.tableaus.length; i++) {
-      console.log("Проверяем Tableau");
+      // console.log("Проверяем Tableau");
       if (this.tableaus[i].canAccept(card)) {
-        card.parent === 'foundation' ?
-        this.decrementPoints(Config.pointsFromFoundationToTableaue) :
-        this.incrementPoints(Config.pointsForTableaue);
+        card.parent === "foundation"
+          ? this.decrementPoints(Config.pointsFromFoundationToTableaue)
+          : this.incrementPoints(Config.pointsForTableaue);
         this.moveCardToTableau(card, i);
         return;
       }
@@ -294,7 +317,7 @@ export class Game {
   }
 
   handleCardBackClick(card) {
-    console.log("клик по закрытой карте");
+    // console.log("клик по закрытой карте");
     this.audio.play("cardFlip");
     this.tableaus[card.indexTableau].flipTopCard();
     this.incrementPoints(Config.pointsForCardFlip);
@@ -551,7 +574,8 @@ export class Game {
           this.highlightCard(wasteCard);
           this.highlightFoundation(i);
           // this.messageEl.style.fontSize = "18px";
-          this.messageEl.textContent = "Можно переместить карту из стока в foundation";
+          this.messageEl.textContent =
+            "Можно переместить карту из стока в foundation";
           this.messageEl.style.color = "yellow";
           this.setHintTimeout();
           return;
@@ -711,14 +735,13 @@ export class Game {
   }
 
   setupEventListeners() {
-    this.stock.element.addEventListener("click", () => {      
+    this.stock.element.addEventListener("click", () => {
       this.audio.play("cardFlip");
       this.stock.deal();
-      if (this.stock.index ===  this.stock.cards.length) {        
-        this.stock.element.classList.replace('stock', 'card-waste');
-      }
-      else {
-        this.stock.element.classList.replace('card-waste', 'stock');
+      if (this.stock.index === this.stock.cards.length) {
+        this.stock.element.classList.replace("stock", "card-waste");
+      } else {
+        this.stock.element.classList.replace("card-waste", "stock");
       }
       this.renderCards();
     });

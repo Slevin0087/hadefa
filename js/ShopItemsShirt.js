@@ -1,5 +1,5 @@
 export const shopItemsShirt = {
-  faceUp: {
+  shirt: {
     classic: document.getElementById("classicSh-skin"),
     elegantRed: document.getElementById("elegantRed-skin"),
     goldV: document.getElementById("goldV-skin"),
@@ -8,49 +8,49 @@ export const shopItemsShirt = {
     treeB: document.getElementById("treeB-skin"),
     sepiya: document.getElementById("sepiya-skin"),
   },
+  selectedStyle: "classic-shirt",
 };
 
-const classicFaceUpBtn =
-  shopItemsShirt.faceUp.classic.getElementsByTagName("button");
-console.log("classicFaceUpBtn:", classicFaceUpBtn);
+const classicShirtBtn =
+  shopItemsShirt.shirt.classic.getElementsByTagName("button");
+const elegantRedShirtBtn =
+  shopItemsShirt.shirt.elegantRed.getElementsByTagName("button");
+const goldVShirtBtn = shopItemsShirt.shirt.goldV.getElementsByTagName("button");
+const cosmoVioletShirtpBtn =
+  shopItemsShirt.shirt.cosmoViolet.getElementsByTagName("button");
+const diceShirtBtn = shopItemsShirt.shirt.dice.getElementsByTagName("button");
+const treeBShirtBtn = shopItemsShirt.shirt.treeB.getElementsByTagName("button");
+const sepiyaShirtBtn =
+  shopItemsShirt.shirt.sepiya.getElementsByTagName("button");
 
-classicFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
+classicShirtBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.classic)
+);
+elegantRedShirtBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.elegantRed)
+);
+goldVShirtBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.goldV)
+);
+cosmoVioletShirtpBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.cosmoViolet)
+);
+diceShirtBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.dice)
+);
+treeBShirtBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.treeB)
+);
+sepiyaShirtBtn[0].addEventListener("click", (e) =>
+  handleChangeScin(e, shopItemsShirt.shirt.sepiya)
+);
 
-const elegantRedFaceUpBtn = shopItemsShirt.faceUp.elegantRed.getElementsByTagName("button");
-console.log("elegantRedFaceUpBtn:", elegantRedFaceUpBtn);
-
-elegantRedFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const goldVFaceUpBtn = shopItemsShirt.faceUp.goldV.getElementsByTagName("button");
-console.log("goldVFaceUpBtn:", goldVFaceUpBtn);
-
-goldVFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const cosmoVioletFaceUpBtn = shopItemsShirt.faceUp.cosmoViolet.getElementsByTagName("button");
-console.log("cosmoVioletFaceUpBtn:", cosmoVioletFaceUpBtn);
-
-cosmoVioletFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const diceFaceUpBtn = shopItemsShirt.faceUp.dice.getElementsByTagName("button");
-console.log("diceFaceUpBtn:", diceFaceUpBtn);
-
-diceFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const treeBFaceUpBtn = shopItemsShirt.faceUp.treeB.getElementsByTagName("button");
-console.log("treeBFaceUpBtn:", treeBFaceUpBtn);
-
-treeBFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-const sepiyaFaceUpBtn = shopItemsShirt.faceUp.sepiya.getElementsByTagName("button");
-console.log("sepiyaFaceUpBtn:", sepiyaFaceUpBtn);
-
-sepiyaFaceUpBtn[0].addEventListener("click", (e) => handleChangeScin(e));
-
-function handleChangeScin(event) {
-  event.target;
-  console.log("event.target:", event.target);
+function handleChangeScin(event, element) {
   const price = Number(event.target.dataset.price);
-  
-  console.log('price:', price);
-  
+  console.log("price:", price);
+  console.log("event.target:", event.target);
+  console.log("element:", element);
+  const styleName = `${event.target.dataset.styleBtn}`;
+  console.log("styleName:", styleName);
+  shopItemsShirt.selectedStyle = styleName;
 }

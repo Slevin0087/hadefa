@@ -1,149 +1,415 @@
-/* Глобальные переменные и настройки */
 :root {
-  /* Цвета */
-  --bg-color: #076324; /* Зеленый фон как в классической косынке */
-  --text-color: white;
-  --card-bg: white;
-  --card-red: red;
-  --card-black: black;
-  --card-back-bg: linear-gradient(135deg, #d00, #a00);
-  --card-back-border: #800;
-  --button-bg: #1a3e1a;
-
-  /* Размеры карт */
-  --card-width-mobile: 13vw;
-  --card-height-mobile: 10vh;
-  --card-width-tablet: 70px;
-  --card-height-tablet: 100px;
-  --card-width-desktop: 6.5vw;
-  --card-height-desktop: 23vh;
-
-  /* Отступы */
-  --game-container-padding: 3vh;
-  --button-padding: 8px 15px;
-  --top-top: 10vh;
-  /* Разеры высоты и ширины*/
-  --body-height: 100vh;
-  --body-width: 100vw;
-  --left-right-padding: 1vw;
-  --left-foundation-0: 45vw;
-  --game-container-height: 80vh;
-  --game-container-width: 100vw;
-  --controls-height: calc(10vh / 2);
-  --message-top: 10vh;
-  --padding-left-foundation: calc(
-    (
-        var(--body-width) -
-          (var(--card-width-mobile) * 7 + (var(--left-right-padding) * 2))
-      ) / 6
-  );
-  --card-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-
-  /* Временные параметры */
-  --hover-transition: transform 0.2s;
+  --card-width-350px: 100%;
+  --card-width-390px: 50%;
+  --card-width-600px: 70px;
+  --card-width-1200px: 100px;
+  --card-width-1600px: 150px;
+  --card-height-350px: 100%;
+  --card-height-390px: 70px;
+  --card-height-600px: 90px;
+  --card-height-1200px: 150px;
+  --card-height-1600px: 200px;
+  --card-gap-350px: 1%;
+  --card-gap-390px: 5px;
+  --card-gap-450px: 10px;
+  --card-gap-600px: 10px;
+  --card-gap-1200px: 15px;
+  --stock-borderRadius-350px: 0.25em;
+  --stock-borderRadius-900px: 10px;
+  --stock-borderRadius-1600px: 10px;
+  --minHeight-messageContainer-350px: 80px;
+  --minHeight-messageContainer-700px: 25px;
+  --minHeight-messageContainer-1600px: 20px;
+  --modal-content-width: 15.62em;
+  --modal-content-height: 9.37em;
 }
 
-/* @media screen and (min-device-width: 320px) and (max-device-width: 420px) { */
-html {
-  font-size: 16px;
-  /*Основная единица измерения*/
-  line-height: 1.15;
-  height: 100%; /* Для полностраничных макетов */
-  width: 100%;
-  -webkit-text-size-adjust: 100%; /*Стандартная высота строки*/
-  -webkit-font-smoothing: antialiased; /* Сглаживание шрифтов для WebKit */
-  -moz-osx-font-smoothing: grayscale; /* Сглаживание шрифтов для macOS */
-  /*Отключает автоматическое увеличение текста в Safari*/
-  scroll-behavior: smooth; /*Плавная прокрутка*/
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; /* Плавный скролл на iOS */
-  text-rendering: optimizeLegibility; /* Улучшает читаемость */
-
-
-}
-
+/**
+  Нормализация блочной модели
+ */
 *,
-*::before,
-*::after {
-  box-sizing: inherit; /* Наследуем box-sizing */
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  width: 100vw;
+  height: 100vh;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
 }
 
 body {
-  padding: 0;
-  margin: 0;
-  font-size: 14px;
-  width: 100vw;
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  width: 100%;
+  height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill="none"], [fill^="url"])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke="none"], [stroke^="url"])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* html {
+  user-select: none;
   min-height: 100vh;
+} */
+
+body {
+  user-select: none;
+  /* font-size: 14px; */
   /* box-sizing: border-box; */
   touch-action: manipulation;
-  background-color: #076324;
+  /* background-color: #3b0763; */
   color: white;
   overflow: hidden;
-  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  background: url("../assets/shop/fons/fon_4.jpg") no-repeat center center fixed;
+  /* background-color: #333;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 5px
+  ); */
+}
+
+.full-screen-button {
+  position: absolute;
+  margin: 0.5em;
+  z-index: 2;
+}
+
+.info-container {
+  margin-top: 1.5em;
+  width: 100%;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(161, 13, 13, 0.8);
+}
+
+.modal-content {
+  position: absolute;
+  top: calc(50% - (var(--modal-content-height) / 2));
+  left: calc(50% - (var(--modal-content-width) / 2));
+  width: var(--modal-content-width);
+  height: var(--modal-content-height);
+}
+
+.name-h2 {
+  color: #22e44c;
+}
+
+input {
+  /* font-size: 16px; */
+  margin: 0.6em;
+  padding: 0.6em;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 0.6em;
+  margin-top: 0.3em;
   justify-content: center;
-  align-items: center;
+}
 
-  @media (min-width: 350px) {
-    font-size: 14px;
-  }
+#message,
+.points-game {
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 0.6em;
+  margin: 0.6em;
+  color: black;
+}
 
-  @media (min-width: 600px) {
-    font-size: 15px;
-  }
-
-  @media (min-width: 900px) {
-    font-size: 16px;
-  }
-
-  @media (min-width: 1200px) {
-    font-size: 18px;
-  }
+.game-interface {
+  margin: 0px 0.2em;
+  height: 100%;
 }
 
 #game-container {
-  width: var(--game-container-width);
-  height: var(--game-container-height);
-  margin: 10px;
-  padding: 5px;
+  margin: 0.5em 0.2em;
+  text-align: center;
+  align-items: center;
+  height: 40%;
+  box-sizing: border-box;
 }
 
-/* Стили для карт и игровых зон */
+.row-1,
+.row-2 {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.6em 0px 3.12em;
+  box-sizing: border-box;
+  width: 100%;
+  height: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.row-a,
+.row-b {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row-a {
+  width: calc((100% / 7) * 2);
+  height: 100%;
+}
+
+.row-b {
+  width: calc((100% / 7) * 4);
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  padding: 0.6em;
+  flex-wrap: wrap;
+  margin-bottom: 1.25em;
+  margin-top: 50vh;
+}
+
+.controls-btn {
+  color: black;
+}
+
 .stock,
+.card-waste,
+.foundation,
+.card,
+.card-placeholder {
+  height: 100%;
+  border-radius: var(--stock-borderRadius-350px);
+  box-sizing: border-box;
+}
+
+.stock {
+  cursor: pointer;
+  border: 0.06em solid black;
+}
+
 .card-placeholder,
 .foundation,
-.card {
-  position: absolute;
-  width: var(--card-width-mobile);
-  height: var(--card-height-mobile);
-  top: var(--top-top);
-
-  border-radius: 5px;
-  box-sizing: border-box;
-
-  @media (min-width: 1200px) {
-    --top-top: 5vh;
-    width: var(--card-width-desktop);
-    height: var(--card-height-desktop);
-    top: var(--top-top);
-  }
-}
-
-.card-placeholder,
-.foundation {
-  border: 2px dashed rgba(255, 255, 255, 0.3);
+.card-waste {
+  position: relative;
+  border: 0.15em dashed rgb(255, 255, 255);
 }
 
 .card {
   background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4vw;
   font-weight: bold;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0.06em 0.06em 0.18em rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
   cursor: pointer;
   transition: transform 0.2s;
   user-select: none;
+  border: 0.06em solid black;
+}
+
+.top-left {
+  position: absolute;
+  box-sizing: border-box;
+  text-align: left;
+  left: 5%;
+  top: -5%;
+}
+
+.center {
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.9em;
+}
+
+.bottom-right {
+  position: absolute;
+  box-sizing: border-box;
+  text-align: right;
+  right: 5%;
+  bottom: -5%;
+  transform: rotate(180deg);
 }
 
 .card.red {
@@ -154,47 +420,40 @@ body {
   color: black;
 }
 
-.card-back,
+.card-faceUp {
+  background-color: #a8c5c4;
+  background-image: linear-gradient(
+    90deg,
+    rgba(139, 69, 19, 0.1) 0%,
+    transparent 50%,
+    rgba(139, 69, 19, 0.1) 100%
+  );
+  border: 0.12em solid #0b0b0b;
+  /* color: #5a3921; */
+  font-weight: bold;
+}
+
+/* .card-back,
 .stock {
   background: repeating-linear-gradient(
     45deg,
     #1a5a1a,
-    #1a5a1a 10px,
-    #165016 10px,
-    #165016 20px
+    #1a5a1a 0.3em,
+    #165016 0.3em,
+    #165016 0.6em
   );
   color: transparent !important;
-}
-
-#message {
-  display: block;
-  /* top: var(--message-top); */
-  text-align: center;
-  padding: 10px;
-  margin: 10px;
-  /* font-size: 1.2rem; */
-  /* height: 3vh; */
-  top: 20px;
-}
-
-#controls {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
+} */
 
 button {
-  padding: 12px 24px;
-  font-size: 1rem;
+  padding: 0.37em 0.5em;
+  font-size: 1.25em;
   cursor: pointer;
   background-color: #4caf50;
   color: white;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 0.06em solid black;
+  border-radius: 0.25em;
+  box-shadow: 0 0.12em 0.31em rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s;
 }
 
@@ -206,235 +465,515 @@ button:active {
   transform: scale(0.98);
 }
 
-.stock {
-  left: 2%;
-  top: var(--top-top);
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    left: var(--left-right-padding);
+@media (min-width: 350px) {
+  .points-game,
+  #message {
+    padding: 0.31em;
+    margin: 0.12em;
+  }
+
+  #message {
+    min-height: var(--minHeight-messageContainer-350px);
+  }
+
+  .info-container {
+    margin-top: 0.3em;
+  }
+
+  .row-1,
+  .row-2 {
+    margin: 0.6em 0px 1.25em;
+  }
+
+  /* .row-2 {
+    gap: var(--card-gap-350px);
+  } */
+
+  /* .row-1 {
+    gap: calc(var(--card-width-350px) / 2 + var(--card-gap-390px) * 2);
+  } */
+
+  .stock,
+  .card-waste {
+    width: 50%;
+  }
+
+  .card-placeholder,
+  .foundation {
+    width: calc(100% / 4);
+  }
+
+  /* .card-placeholder, */
+  /* .foundation, */
+  .card {
+    width: calc(var(--card-width-350px) + var(--stock-borderRadius-350px));
+    height: calc(var(--card-height-350px) + var(--stock-borderRadius-350px));
+  }
+
+  #controls {
+    margin-top: 65%;
+  }
+
+  .center {
+    font-size: 2em;
+  }
+
+  /* .row-a,
+  .row-b {
+    gap: var(--card-gap-350px);
+  } */
+}
+
+@media (min-width: 358px) {
+  #controls {
+    margin-top: 33vh;
   }
 }
-#waste {
-  /* left: 15%; */
-  top: var(--top-top);
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    left: calc(
-      var(--card-width-desktop) + var(--padding-left-foundation) +
-        var(--left-right-padding)
-    );
+
+@media (min-width: 450px) {
+  .row-1,
+  .row-2 {
+    height: 30%;
   }
 }
-.foundation {
-  top: var(--top-top);
-}
-#foundation-0 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 3 +
-      var(--left-right-padding)
-  );
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 3 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+/* @media (min-width: 450px) {
+  .row-1,
+  .row-2 {
+    margin: 10px 0px 30px;
+  }
+
+  .row-2 {
+    gap: var(--card-gap-450px);
+  }
+
+  .row-1 {
+    gap: calc(var(--card-width-390px) + var(--card-gap-450px) * 2);
+  }
+
+  .stock,
+  .card-placeholder,
+  .foundation,
+  .card {
+    width: var(--card-width-390px);
+    height: var(--card-height-390px);
+  }
+
+  .center {
+    font-size: 30px;
+  }
+
+  .row-a,
+  .row-b {
+    gap: var(--card-gap-450px);
+  }
+
+  #controls {
+    margin-top: 55vh;
+  }
+} */
+
+@media (min-width: 600px) {
+  .row-1,
+  .row-2 {
+    height: 35%;
+  }
+
+  #controls {
+    margin-top: 33vh;
+  }
+
+  .top-left {
+    top: -3%;
+  }
+
+  .center {
+    font-size: 4em;
+  }
+
+  .bottom-right {
+    bottom: -3%;
   }
 }
-#foundation-1 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 2 +
-      var(--left-right-padding)
-  );
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 2 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+@media (min-width: 700px) {
+  .row-1,
+  .row-2 {
+    width: 95%;
+    height: 40%;
+  }
+
+  #message {
+    min-height: var(--minHeight-messageContainer-700px);
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-#foundation-2 {
-  right: calc(
-    var(--card-width-mobile) + var(--padding-left-foundation) +
-      var(--left-right-padding)
-  );
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
+
+/* @media (min-width: 600px) {
+  .row-1,
+  .row-2 {
+    margin: 10px 0px 30px;
+  }
+
+  .row-2 {
+    gap: var(--card-gap-600px);
+  }
+
+  .row-1 {
+    gap: calc(var(--card-width-600px) + var(--card-gap-600px) * 2);
+  }
+
+  .stock,
+  .card-placeholder,
+  .foundation,
+  .card {
+    min-width: var(--card-width-600px);
+    min-height: var(--card-height-600px);
+  }
+
+  .center {
+    font-size: 48px;
+  }
+
+  .row-a,
+  .row-b {
+    gap: var(--card-gap-600px);
+  }
+
+  #controls {
+    margin-top: 55vh;
+  }
+} */
+
+/* @media (min-width: 900px) {
+  #message {
+    min-height: var(--minHeight-messageContainer-1600px);
+  }
+  .row-1,
+  .row-2 {
+    margin: 10px 0px 30px;
+  }
+
+  .row-2 {
+    gap: var(--card-gap-1200px);
+  }
+
+  .row-1 {
+    gap: calc(var(--card-width-1200px) + var(--card-gap-1200px) * 2);
+  }
+
+  .stock,
+  .card-placeholder,
+  .foundation,
+  .card {
+    min-width: var(--card-width-1200px);
+    min-height: var(--card-height-1200px);
+    border-radius: var(--stock-borderRadius-900px);
+  }
+
+  .card-back,
+  .stock {
+    background: repeating-linear-gradient(
+      45deg,
+      #1a5a1a,
+      #1a5a1a 10px,
+      #165016 10px,
+      #165016 20px
     );
-    right: calc(
-      var(--card-width-desktop) + var(--padding-left-foundation) +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+    color: transparent !important;
+  }
+
+  .card-placeholder,
+  .foundation {
+    border: 5px dashed rgb(255, 255, 255);
+  }
+
+  .card {
+    font-size: 18px;
+  }
+
+  .center {
+    font-size: 90px;
+  }
+
+  .row-a,
+  .row-b {
+    gap: var(--card-gap-1200px);
+  }
+
+  #controls {
+    margin-top: 45vh;
+  }
+} */
+
+@media (min-width: 900px) {
+  .row-1,
+  .row-2 {
+    width: 90%;
+    height: 40%;
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-#foundation-3 {
-  right: var(--left-right-padding);
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    /* top: 40%; */
-    right: var(--left-right-padding);
+
+@media (min-width: 1000px) {
+  .row-1,
+  .row-2 {
+    width: 90%;
+    height: 50%;
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-.card-placeholder#tableau-0 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 6 +
-      var(--left-right-padding)
-  );
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 6 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+@media (min-width: 1200px) {
+  .row-1,
+  .row-2 {
+    width: 80%;
+    height: 45%;
+  }
+
+  #controls {
+    margin-top: 40vh;
+  }
+
+  .top-left {
+    top: -3%;
+  }
+
+  .center {
+    font-size: 5em;
+  }
+
+  .bottom-right {
+    bottom: -3%;
   }
 }
-.card-placeholder#tableau-1 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 5 +
-      var(--left-right-padding)
-  );
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 5 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+@media (min-width: 1300px) {
+  .row-1,
+  .row-2 {
+    width: 76%;
+    height: 50%;
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-.card-placeholder#tableau-2 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 4 +
-      var(--left-right-padding)
-  );
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 4 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+@media (min-width: 1400px) {
+  .row-1,
+  .row-2 {
+    width: 78%;
+    height: 50%;
+  }
+
+  .row-a,
+  .row-b,
+  .row-2 {
+    gap: 0.5em;
+  }
+
+  .row-b {
+    width: calc((100% / 7) * 4 - 0.25em);
+  }
+
+  .row-a {
+    width: calc((100% / 7) * 2 - 0.25em);
+  }
+
+  .row-1 {
+    gap: 1em;
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-.card-placeholder#tableau-3 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 3 +
-      var(--left-right-padding)
-  );
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 3 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+@media (min-width: 1500px) {
+  .row-1,
+  .row-2 {
+    width: 72%;
+    height: 50%;
+  }
+
+  .row-a,
+  .row-b,
+  .row-2 {
+    gap: 0.7em;
+  }
+
+  .row-b {
+    width: calc((100% / 7) * 4 - 0.35em);
+  }
+
+  .row-a {
+    width: calc((100% / 7) * 2 - 0.35em);
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-.card-placeholder#tableau-4 {
-  right: calc(
-    (var(--card-width-mobile) + var(--padding-left-foundation)) * 2 +
-      var(--left-right-padding)
-  );
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      (var(--card-width-desktop) + var(--padding-left-foundation)) * 2 +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+/* @media (min-width: 1200px) {
+  .info-container {
+    margin-top: 10px;
+  }
+
+  .row-2 {
+    gap: var(--card-gap-1200px);
+  }
+
+  .row-1 {
+    gap: calc(var(--card-width-1200px) + var(--card-gap-1200px) * 2);
+    margin-bottom: 10px;
+  }
+
+  .stock,
+  .card-placeholder,
+  .foundation,
+  .card {
+    min-width: var(--card-width-1200px);
+    min-height: var(--card-height-1200px);
+    border-radius: var(--stock-borderRadius-900px);
+  }
+
+  .card {
+    font-size: 20px;
+  }
+
+  .center {
+    font-size: 85px;
+  }
+
+  .row-a,
+  .row-b {
+    gap: var(--card-gap-1200px);
+  }
+
+  #controls {
+    margin-top: 47vh;
+  }
+} */
+
+@media (min-width: 1600px) {
+  #game-container {
+    margin-top: 5px;
+    /* min-height: 80vh;
+    max-height: 85vh; */
+  }
+
+  .row-1,
+  .row-2 {
+    margin: 5px 0px 20px;
+  }
+
+  /* .row-2 {
+    gap: var(--card-gap-1200px);
+  }
+
+  .row-1 {
+    gap: calc(var(--card-width-1600px) + var(--card-gap-1200px) * 2);
+  } */
+
+  .row-a,
+  .row-b,
+  .row-2 {
+    gap: 0.7em;
+  }
+
+  .row-b {
+    width: calc((100% / 7) * 4 - 0.35em);
+  }
+
+  .row-a {
+    width: calc((100% / 7) * 2 - 0.35em);
+  }
+
+  .stock,
+  .card-placeholder,
+  .foundation,
+  .card {
+    min-width: var(--card-width-1600px);
+    min-height: var(--card-height-1600px);
+  }
+
+  .card {
+    font-size: 22px;
+  }
+
+  .center {
+    /* margin: 40px 0px 40px; */
+    font-size: 120px;
+  }
+
+  .row-a,
+  .row-b {
+    gap: 0.7em;
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-.card-placeholder#tableau-5 {
-  right: calc(
-    var(--card-width-mobile) + var(--padding-left-foundation) +
-      var(--left-right-padding)
-  );
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    --padding-left-foundation: calc(
-      (
-          var(--body-width) -
-            (var(--card-width-desktop) * 7 + (var(--left-right-padding) * 2))
-        ) / 6
-    );
-    right: calc(
-      var(--card-width-desktop) + var(--padding-left-foundation) +
-        var(--left-right-padding)
-    );
-    /* top: 40%; */
+
+@media (min-width: 1900px) {
+  .info-container {
+    margin-bottom: 15px;
+  }
+
+  #game-container {
+    margin-top: 5px;
+    /* min-height: 80vh;
+    max-height: 85vh; */
+  }
+
+  .row-1,
+  .row-2 {
+    margin: 5px 0px 20px;
+  }
+
+  .row-2 {
+    gap: var(--card-gap-1200px);
+  }
+
+  .row-1 {
+    gap: calc(var(--card-width-1600px) + var(--card-gap-1200px) * 2);
+  }
+
+  .stock,
+  .card-placeholder,
+  .foundation,
+  .card {
+    min-width: var(--card-width-1600px);
+    min-height: var(--card-height-1600px);
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .card {
+    font-size: 24px;
+  }
+
+  .center {
+    font-size: 120px;
+  }
+
+  .row-a,
+  .row-b {
+    gap: var(--card-gap-1200px);
+  }
+
+  #controls {
+    margin-top: 40vh;
   }
 }
-.card-placeholder#tableau-6 {
-  right: var(--left-right-padding);
-  top: 30%;
-  @media (min-width: 1200px) {
-    --left-right-padding: calc(var(--body-width) / 4);
-    /* top: 40%; */
-    right: var(--left-right-padding);
-  }
-}
-/* } */

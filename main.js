@@ -3,6 +3,8 @@ import { Menu } from "./js/ui/Menu.js";
 import { UseName } from "./js/ui/UseName.js";
 import { Shop } from "./js/ui/Shop.js";
 import { AudioManager } from "./js/ui/Audio.js";
+import { shopItemsFU } from "./js/ShopItemsFU.js";
+import { shopItemsShirt } from "./js/ShopItemsShirt.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   let nameValue = "";
@@ -85,12 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("hint")
     .addEventListener("click", () => game.showHint());
 
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker
-        .register("sw.js")
-        .then(() => console.log("SW зарегистрирован"))
-        .catch((err) => console.error("Ошибка SW:", err));
-    });
-  }
+  // const classicFaceUpBtn =
+  //   shopItemsFU.faceUp.classic.getElementsByTagName("button");
+  // console.log("classicFaceUpBtn:", classicFaceUpBtn);
+  // if ("serviceWorker" in navigator) {
+  //   window.addEventListener("load", () => {
+  //     navigator.serviceWorker
+  //       .register("sw.js")
+  //       .then(() => console.log("SW зарегистрирован"))
+  //       .catch((err) => console.error("Ошибка SW:", err));
+  //   });
+  // }
 });

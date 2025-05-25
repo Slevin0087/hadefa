@@ -304,9 +304,9 @@ input {
 }
 
 .points-game {
-  border: 0.1em solid rgb(255, 225, 0);
+  border: 0.1em solid rgb(61, 56, 12);
   border-radius: 0.7em;
-  background-color: rgb(0, 255, 34);
+  background-color: rgba(135, 150, 137, 0.571);
 }
 
 .game-interface {

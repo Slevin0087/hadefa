@@ -133,7 +133,7 @@ export class Game {
     this.renderCardsForFoundation();
     // Рендерим карту в waste
     this.renderCardsForWaste();
-    // Устанавливаем стили для stock добавив класс 
+    // Устанавливаем стили для stock добавив класс
     this.renderStockElement();
   }
 
@@ -164,10 +164,22 @@ export class Game {
   }
 
   renderStockElement() {
-    const stockElement = document.getElementById('stock');
-    stockElement.className = '';
-    stockElement.classList.add('stock', 'card-back', `${shopItemsShirt.selectedStyle}`);
-  };
+    this.stock.element.className = "";
+    this.stock.element.classList.add("stock");
+    if (this.stock.index === this.stock.cards.length) {
+      console.log("if");
+
+      this.stock.element.classList.replace("stock", "card-waste");
+    } else {
+      console.log("else click stock");
+
+      // this.stock.element.classList.replace("card-waste", "stock");
+      this.stock.element.classList.add(
+        "card-back",
+        `${shopItemsShirt.selectedStyle}`
+      );
+    }
+  }
 
   renderCard(card, containerId, offset) {
     const container = document.getElementById(containerId);
@@ -211,15 +223,15 @@ export class Game {
       cardElement.style.top = offset * topPx - cStyleBorder + "px";
       // cardElement.style.top = offset * topPx + "px";
     } else {
-      console.log('else st');
-      
+      console.log("else st");
+
       cardElement.style.top = -cStyleBorder + "px";
       // cardElement.style.top = 0 + "px";
     }
     if (!card.faceUp) {
       // cardElement.classList.add("card-back");
 
-      cardElement.classList.add(`${shopItemsShirt.selectedStyle}`, 'card-back');
+      cardElement.classList.add(`${shopItemsShirt.selectedStyle}`, "card-back");
     }
     if (card.faceUp) {
       // cardElement.classList.add("card-faceUp");
@@ -738,11 +750,15 @@ export class Game {
     this.stock.element.addEventListener("click", () => {
       this.audio.play("cardFlip");
       this.stock.deal();
-      if (this.stock.index === this.stock.cards.length) {
-        this.stock.element.classList.replace("stock", "card-waste");
-      } else {
-        this.stock.element.classList.replace("card-waste", "stock");
-      }
+      // if (this.stock.index === this.stock.cards.length) {
+      //   console.log("if");
+
+      //   this.stock.element.classList.replace("stock", "card-waste");
+      // } else {
+      //   console.log("else click stock");
+
+      //   this.stock.element.classList.replace("card-waste", "stock");
+      // }
       this.renderCards();
     });
 

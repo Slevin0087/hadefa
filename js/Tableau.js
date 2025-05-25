@@ -2,6 +2,7 @@ export class Tableau {
   constructor(index) {
     this.index = index;
     this.cards = [];
+    // this.faceDownCards = [];
     this.element = this.createTableauElement();
   }
 

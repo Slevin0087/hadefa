@@ -44,6 +44,7 @@ export class Game {
     // this.faceUpStyle = `${shopItemsFU.selectStyle}`;
     this.shirtStyle = "classic";
     this.fonBody = "";
+    this.faceDownCArds = [];
   }
 
   init() {
@@ -75,6 +76,7 @@ export class Game {
     this.foundations = Array.from({ length: 4 }, (_, i) => new Foundation(i));
     this.tableaus = Array.from({ length: 7 }, (_, i) => new Tableau(i));
     this.stock = new Stock();
+    this.faceDownCArds = [];
   }
 
   setupGame() {
@@ -88,6 +90,7 @@ export class Game {
         const card = this.deck.deal();
         card.faceUp = j === i; // Последняя карта в столбце открыта
         this.tableaus[i].addCard(card);
+        if (!card.faceUp) this.faceDownCArds.push(card);
       }
     }
 
@@ -152,6 +155,7 @@ export class Game {
         this.renderCard(card, `tableau-${i}`, j);
       });
     });
+    console.log("this.faceDownCArds:", this.faceDownCArds)
   }
 
   renderCardsForWaste() {
@@ -171,9 +175,6 @@ export class Game {
 
       this.stock.element.classList.replace("stock", "card-waste");
     } else {
-      console.log("else click stock");
-
-      // this.stock.element.classList.replace("card-waste", "stock");
       this.stock.element.classList.add(
         "card-back",
         `${shopItemsShirt.selectedStyle}`
@@ -229,17 +230,13 @@ export class Game {
       // cardElement.style.top = 0 + "px";
     }
     if (!card.faceUp) {
+      console.log('рендер закрытых карт в tableau');
+      
       // cardElement.classList.add("card-back");
-
       cardElement.classList.add(`${shopItemsShirt.selectedStyle}`, "card-back");
     }
     if (card.faceUp) {
       // cardElement.classList.add("card-faceUp");
-      console.log(
-        "`${shopItemsFU.selectedStyle}`",
-        `${shopItemsFU.selectedStyle}`
-      );
-
       cardElement.classList.add(`${shopItemsFU.selectedStyle}`);
       // this.handleCardClick(card, cardElement)
       cardElement.addEventListener("click", () => this.handleCardClick(card));
@@ -329,11 +326,19 @@ export class Game {
   }
 
   handleCardBackClick(card) {
+    console.log('this.faceDownCArds ДО:', this.faceDownCArds);
+    
+    if (this.faceDownCArds.length > 0) {
+      const newC = this.faceDownCArds.filter((cardFaceDoun) => cardFaceDoun !== card);
+      this.faceDownCArds = newC;
+      console.log('this.faceDownCArds ПОСЛЕ:', this.faceDownCArds);
+    }
     // console.log("клик по закрытой карте");
     this.audio.play("cardFlip");
     this.tableaus[card.indexTableau].flipTopCard();
     this.incrementPoints(Config.pointsForCardFlip);
     this.renderCards();
+    if (this.faceDownCArds.length <= 0) alert('Все карты открылись');
   }
 
   selectCard(card, cardElement) {

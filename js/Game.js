@@ -338,7 +338,10 @@ export class Game {
     this.tableaus[card.indexTableau].flipTopCard();
     this.incrementPoints(Config.pointsForCardFlip);
     this.renderCards();
-    if (this.faceDownCArds.length <= 0) alert('Все карты открылись');
+    if (this.faceDownCArds.length <= 0) {
+      // alert('Все карты открылись');
+      document.getElementById('blinking-text').classList.remove('hidden');
+    }
   }
 
   selectCard(card, cardElement) {

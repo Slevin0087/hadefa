@@ -371,12 +371,24 @@ input {
 .blinking-text {
   width: fit-content;
   color: #d1070a;
+  -webkit-animation: blink 1s infinite; /* Для Safari */
   animation: blink 1.5s infinite;
   background-color: #76ed08;
   align-content: center;
   border-radius: var(--blinking-text-br);
   padding: 0.5em 0.5em;
   border: 0.1em solid black;
+}
+
+@-webkit-keyframes blink {
+  /* Для Safari */
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes blink {

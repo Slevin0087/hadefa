@@ -54,6 +54,9 @@ export class Game {
     this.renderGame();
     this.setupEventListeners();
     this.updateUI();
+    setTimeout(() => {
+      document.getElementById('blinking-text').classList.remove('hidden');
+    }, 8000)
   }
 
   updateUI() {

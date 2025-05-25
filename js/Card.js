@@ -22,6 +22,10 @@ export class Card {
     return this.faceUp ? `${this.value}${this.suit}` : "";
   }
 
+    getBottomSymbol() {
+    return this.faceUp ? `${this.suit}${this.value}` : "";
+  }
+
   flip() {
     this.faceUp = !this.faceUp;
   }

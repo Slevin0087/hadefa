@@ -428,6 +428,8 @@ input {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   background: white;
   font-weight: bold;
   box-shadow: 0.06em 0.06em 0.18em rgba(0, 0, 0, 0.3);
@@ -439,28 +441,19 @@ input {
 }
 
 .top-left {
-  position: absolute;
   box-sizing: border-box;
   text-align: left;
-  left: 5%;
-  top: -5%;
+  /* margin-left: auto; */
 }
 
 .center {
-  position: absolute;
   box-sizing: border-box;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 1.9em;
 }
 
 .bottom-right {
-  position: absolute;
   box-sizing: border-box;
-  text-align: right;
-  right: 5%;
-  bottom: -5%;
+  text-align: left;
   transform: rotate(180deg);
 }
 
@@ -567,7 +560,7 @@ button:active {
   } */
 
   .center {
-    font-size: 2em;
+    font-size: 1.75em;
   }
 
   /* .row-a,
@@ -586,6 +579,10 @@ button:active {
   .row-1,
   .row-2 {
     height: 30%;
+  }
+
+  .center {
+    font-size: 2.5em;
   }
 }
 /* @media (min-width: 450px) {
@@ -639,7 +636,7 @@ button:active {
   }
 
   .center {
-    font-size: 4em;
+    font-size: 3.2em;
   }
 
   .bottom-right {
@@ -658,6 +655,9 @@ button:active {
     min-height: var(--minHeight-messageContainer-700px);
   }
 
+  .center {
+    font-size: 4em;
+  }
   /* #controls {
     margin-top: 36vh;
   } */
@@ -767,6 +767,9 @@ button:active {
     height: 40%;
   }
 
+  .center {
+    font-size: 4em;
+  }
   /* #controls {
     margin-top: 36vh;
   } */
@@ -779,6 +782,9 @@ button:active {
     height: 50%;
   }
 
+  .center {
+    font-size: 5.5em;
+  }
   /* #controls {
     margin-top: 36vh;
   } */
@@ -800,7 +806,7 @@ button:active {
   }
 
   .center {
-    font-size: 5em;
+    font-size: 4.8em;
   }
 
   .bottom-right {
@@ -814,7 +820,9 @@ button:active {
     width: 76%;
     height: 50%;
   }
-
+  .center {
+    font-size: 5.5em;
+  }
   /* #controls {
     margin-top: calc(var(--game-container-height) - var(--info-container-height) * 1.5);
   } */
@@ -965,7 +973,7 @@ button:active {
 
   .center {
     /* margin: 40px 0px 40px; */
-    font-size: 120px;
+    font-size: 4.05em;
   }
 
   .row-a,

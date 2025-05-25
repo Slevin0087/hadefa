@@ -22,6 +22,8 @@
   --minHeight-messageContainer-1600px: 20px;
   --modal-content-width: 15.62em;
   --modal-content-height: 9.37em;
+  --game-container-height: 40%;
+  --info-container-height: 10%;
 }
 
 /**
@@ -310,6 +312,8 @@ input {
 }
 
 .game-interface {
+  display: flex;
+  flex-direction: column;
   margin: 0px 0.2em;
   height: 100%;
 }
@@ -318,7 +322,7 @@ input {
   margin: 0.5em 0.2em;
   text-align: center;
   align-items: center;
-  height: 40%;
+  height: var(--game-container-height);
   box-sizing: border-box;
 }
 
@@ -359,7 +363,7 @@ input {
   padding: 0.6em;
   flex-wrap: wrap;
   margin-bottom: 1.25em;
-  margin-top: 50vh;
+  margin-top: auto;
 }
 
 .blinking-text {
@@ -369,7 +373,7 @@ input {
   background-color: #76ed08;
   align-content: center;
   border-radius: 1em;
-  padding: 0px 0.5em;
+  padding: 0.5em 0.5em;
   border: 0.1em solid black;
 }
 
@@ -544,9 +548,9 @@ button:active {
     height: calc(var(--card-height-350px) + var(--stock-borderRadius-350px));
   }
 
-  #controls {
+  /* #controls {
     margin-top: 65%;
-  }
+  } */
 
   .center {
     font-size: 2em;
@@ -558,11 +562,11 @@ button:active {
   } */
 }
 
-@media (min-width: 358px) {
+/* @media (min-width: 358px) {
   #controls {
     margin-top: 32vh;
   }
-}
+} */
 
 @media (min-width: 450px) {
   .row-1,
@@ -612,9 +616,9 @@ button:active {
     height: 35%;
   }
 
-  #controls {
+  /* #controls {
     margin-top: 32vh;
-  }
+  } */
 
   .top-left {
     top: -3%;
@@ -640,9 +644,9 @@ button:active {
     min-height: var(--minHeight-messageContainer-700px);
   }
 
-  #controls {
+  /* #controls {
     margin-top: 36vh;
-  }
+  } */
 }
 
 /* @media (min-width: 600px) {
@@ -749,9 +753,9 @@ button:active {
     height: 40%;
   }
 
-  #controls {
+  /* #controls {
     margin-top: 36vh;
-  }
+  } */
 }
 
 @media (min-width: 1000px) {
@@ -761,9 +765,9 @@ button:active {
     height: 50%;
   }
 
-  #controls {
+  /* #controls {
     margin-top: 36vh;
-  }
+  } */
 }
 
 @media (min-width: 1200px) {
@@ -773,9 +777,9 @@ button:active {
     height: 45%;
   }
 
-  #controls {
+  /* #controls {
     margin-top: 36vh;
-  }
+  } */
 
   .top-left {
     top: -3%;
@@ -797,9 +801,9 @@ button:active {
     height: 50%;
   }
 
-  #controls {
-    margin-top: 36vh;
-  }
+  /* #controls {
+    margin-top: calc(var(--game-container-height) - var(--info-container-height) * 1.5);
+  } */
 }
 
 @media (min-width: 1400px) {
@@ -827,9 +831,9 @@ button:active {
     gap: 1em;
   }
 
-  #controls {
+  /* #controls {
     margin-top: 36vh;
-  }
+  } */
 }
 
 @media (min-width: 1500px) {
@@ -853,9 +857,9 @@ button:active {
     width: calc((100% / 7) * 2 - 0.35em);
   }
 
-  #controls {
+  /* #controls {
     margin-top: 40vh;
-  }
+  } */
 }
 
 /* @media (min-width: 1200px) {
@@ -955,9 +959,9 @@ button:active {
     gap: 0.7em;
   }
 
-  #controls {
+  /* #controls {
     margin-top: 40vh;
-  }
+  } */
 }
 
 @media (min-width: 1900px) {
@@ -1007,7 +1011,7 @@ button:active {
     gap: var(--card-gap-1200px);
   }
 
-  #controls {
+  /* #controls {
     margin-top: 40vh;
-  }
+  } */
 }

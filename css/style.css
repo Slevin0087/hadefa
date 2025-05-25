@@ -24,6 +24,8 @@
   --modal-content-height: 9.37em;
   --game-container-height: 40%;
   --info-container-height: 10%;
+  --blinking-text-br: 0.7em;
+  --points-game-br: 0.7em;
 }
 
 /**
@@ -307,7 +309,7 @@ input {
 
 .points-game {
   border: 0.1em solid rgb(61, 56, 12);
-  border-radius: 0.7em;
+  border-radius: var(--points-game-br);
   background-color: rgba(135, 150, 137, 0.571);
 }
 
@@ -372,7 +374,7 @@ input {
   animation: blink 1.5s infinite;
   background-color: #76ed08;
   align-content: center;
-  border-radius: 1em;
+  border-radius: var(--blinking-text-br);
   padding: 0.5em 0.5em;
   border: 0.1em solid black;
 }

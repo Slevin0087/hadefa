@@ -371,8 +371,12 @@ input {
 .blinking-text {
   width: fit-content;
   color: #d1070a;
-  -webkit-animation: blink 1s infinite; /* Для Safari */
-  animation: blink 1.5s infinite;
+  /* -webkit-animation: blink 1s infinite;
+  animation: blink 1.5s infinite; */
+  animation: blink 1s infinite;
+  -webkit-animation: blink 1s infinite;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
   background-color: #76ed08;
   align-content: center;
   border-radius: var(--blinking-text-br);
@@ -380,14 +384,31 @@ input {
   border: 0.1em solid black;
 }
 
-@-webkit-keyframes blink {
-  /* Для Safari */
+@keyframes blink {
   0%,
   100% {
     opacity: 1;
   }
   50% {
     opacity: 0;
+  }
+}
+@-webkit-keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+/* @-webkit-keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+    }
+    50% {
+      opacity: 0;
   }
 }
 
@@ -395,11 +416,11 @@ input {
   0%,
   100% {
     opacity: 1;
-  } /* Видимый */
+  }
   50% {
     opacity: 0;
-  } /* Невидимый */
-}
+  }
+} */
 
 .controls-btn {
   color: black;
